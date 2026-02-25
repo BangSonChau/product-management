@@ -1,6 +1,9 @@
 const express = require("express");
 require("dotenv").config();
 
+const database = require("./config/database");
+database.connect();
+
 const route = require("./routes/client/index.route");
 
 const app = express();
@@ -11,7 +14,7 @@ app.set("views", "./views");
 app.set("view engine", "pug");
 
 // Cấu hình thư mục chứa file tĩnh (CSS, JS, hình ảnh)
-app.use(express.static("public")); 
+app.use(express.static("public"));
 
 //Routes
 route(app);
