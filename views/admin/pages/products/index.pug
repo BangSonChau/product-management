@@ -6,12 +6,24 @@ block main
   .card.mb-3
     .card-header Bộ lọc và Tìm kiếm
     .card-body
-      each item in filterStatus 
-        button(
-          class=`btn btn-sm ml-1 btn-outline-success ${item.class} me-2`
-          button-status = item.status
-        ) #{item.name}
-
+      .row
+        .col-6
+          each item in filterStatus 
+            button(
+              class=`btn btn-sm ml-1 btn-outline-success ${item.class} me-2`
+              button-status = item.status
+            ) #{item.name}
+        .col-6
+          form(id="form-search")
+            .input-group
+              input.form-control(
+                type="text"
+                placeholder="Nhập từ khóa"
+                name="keyword"
+              )
+              .input-group-append
+                button.btn.btn-success(type="submit") Tìm
+  
   .card.mb-3
     .card-header Danh sách sản phẩm
     .card-body
