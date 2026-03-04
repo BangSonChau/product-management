@@ -3,29 +3,41 @@ extends  ../../layouts/default.pug
 block main
   h1 Danh sách sản phẩm
 
-  table.table.table-hover
-    thead
-      tr
-        th STT
-        th Hình ảnh
-        th Tiêu đề
-        th Giá
-        th Trạng thái
-        th Hành động
-    tbody
-      // Sản phẩm 1
-      each item, index in products
-        tr
-          td #{index+1}
-          td
-            img.product-img(src=item.thumbnail alt="iPhone 9")
-          td #{item.title}
-          td #{item.price}$
-          td
-            if (item.status === "active")
-              span.badge.bg-success Hoạt động
-            else
-              span.badge.bg-danger Dừng hoạt động
-          td
-            button.btn.btn-warning.btn-sm.me-1 Sửa
-            button.btn.btn-danger.btn-sm Xóa
+  .card.mb-3
+    .card-header Bộ lọc và Tìm kiếm
+    .card-body
+      each item in filterStatus 
+        button(
+          class=`btn btn-sm ml-1 btn-outline-success ${item.class} me-2`
+          button-status = item.status
+        ) #{item.name}
+
+  .card.mb-3
+    .card-header Danh sách sản phẩm
+    .card-body
+      table.table.table-hover
+        thead
+          tr
+            th STT
+            th Hình ảnh
+            th Tiêu đề
+            th Giá
+            th Trạng thái
+            th Hành động
+        tbody
+          // Sản phẩm 1
+          each item, index in products
+            tr
+              td #{index+1}
+              td
+                img.product-img(src=item.thumbnail alt="iPhone 9")
+              td #{item.title}
+              td #{item.price}$
+              td
+                if (item.status === "active")
+                  button.badge.bg-success Hoạt động
+                else
+                  button.badge.bg-danger Dừng hoạt động
+              td
+                button.btn.btn-warning.btn-sm.me-1 Sửa
+                button.btn.btn-danger.btn-sm Xóa
