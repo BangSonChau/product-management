@@ -15,7 +15,7 @@ const port = process.env.PORT;
 app.set("views", "./views");
 app.set("view engine", "pug");
 
-// App local variables
+// App local variables (app.locals) để lưu trữ các biến toàn cục
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // Cấu hình thư mục chứa file tĩnh (CSS, JS, hình ảnh)

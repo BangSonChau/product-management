@@ -1,0 +1,40 @@
+extends  ../../layouts/default.pug
+
+block main
+  h1 Danh sách sản phẩm
+
+  table.table.table-hover
+    thead
+      tr
+        th STT
+        th Hình ảnh
+        th Tiêu đề
+        th Giá
+        th Trạng thái
+        th Hành động
+    tbody
+      // Sản phẩm 1
+      tr
+        td 1
+        td
+          img.product-img(src="path/to/iphone-image.jpg" alt="iPhone 9")
+        td Sản phẩm 1
+        td 100$
+        td
+          span.badge.bg-success Hoạt động
+        td
+          button.btn.btn-warning.btn-sm.me-1 Sửa
+          button.btn.btn-danger.btn-sm Xóa
+
+      // Sản phẩm 2
+      tr
+        td 2
+        td
+          img.product-img(src="path/to/iphone-image.jpg" alt="iPhone 9")
+        td Sản phẩm 2
+        td 150$
+        td
+          span.badge.bg-danger Dừng hoạt động
+        td
+          button.btn.btn-warning.btn-sm.me-1 Sửa
+          button.btn.btn-danger.btn-sm Xóa
