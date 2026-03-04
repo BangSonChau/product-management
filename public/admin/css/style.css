@@ -48,3 +48,8 @@
   text-decoration: none;
 }
 /* End Sider */
+
+.product-img {
+  width: 100px;
+  height: auto;
+}
