@@ -20,6 +20,7 @@ block main
                 type="text"
                 placeholder="Nhập từ khóa"
                 name="keyword"
+                value=keyword
               )
               .input-group-append
                 button.btn.btn-success(type="submit") Tìm
@@ -37,7 +38,6 @@ block main
             th Trạng thái
             th Hành động
         tbody
-          // Sản phẩm 1
           each item, index in products
             tr
               td #{index+1}
