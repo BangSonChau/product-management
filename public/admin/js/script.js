@@ -1,14 +1,14 @@
-const buttonStatus = document.querySelectorAll('[button-status]');
+const buttonStatus = document.querySelectorAll("[button-status]");
 
 if (buttonStatus.length > 0) {
   buttonStatus.forEach((button) => {
     let url = new URL(window.location.href);
 
     console.log(url);
-    
-    button.addEventListener('click', () => {
-      const status = button.getAttribute('button-status');
-      
+
+    button.addEventListener("click", () => {
+      const status = button.getAttribute("button-status");
+
       if (status) {
         url.searchParams.set("status", status);
       } else {
@@ -16,17 +16,16 @@ if (buttonStatus.length > 0) {
       }
       console.log(url);
       window.location.href = url.href;
-    })
-    
-  })
+    });
+  });
 }
 
-const formSearch = document.querySelector('#form-search');
+const formSearch = document.querySelector("#form-search");
 
 if (formSearch) {
   let url = new URL(window.location.href);
 
-  formSearch.addEventListener('submit', (e) => {  
+  formSearch.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const keyWord = e.target.keyword.value.trim();
@@ -38,7 +37,23 @@ if (formSearch) {
     }
 
     window.location.href = url.href;
-  }) 
+  });
 }
 
+//Pagination
+const btnsPagination = document.querySelectorAll("[button-pagination]");
 
+if (btnsPagination) {
+  btnsPagination.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let url = new URL(window.location.href);
+
+      const page = btn.getAttribute("button-pagination");
+
+      url.searchParams.set("page", page);
+
+      window.location.href = url.href;
+    });
+  });
+}
+//EndPagination
