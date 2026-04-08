@@ -28,12 +28,12 @@ module.exports.index = async (req, res) => {
   const countProducts = await Product.countDocuments(find);
 
   let objectPagination = paginationHelper(
-    req.query, 
+    req.query,
     {
       currentPage: 1,
       limitItem: 4,
     },
-    countProducts    
+    countProducts,
   );
   //EndPagination
 
@@ -50,14 +50,37 @@ module.exports.index = async (req, res) => {
   });
 };
 
-// [GET] /admin/products//change-status/:status/:id
+// [PATCH] /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
   const status = req.params.status;
   const id = req.params.id;
 
   //Cập nhật trạng thái của sản phẩm có id
-  await Product.updateOne({_id: id}, {status: status});
+  await Product.updateOne({ _id: id }, { status: status });
 
   //redirect về trang danh sách sản phẩm
-  res.redirect(req.get('Referrer'));
-}
+  res.redirect(req.get("Referrer"));
+};
+
+// [PATCH] /admin/products/change-multi
+module.exports.changeMulti = async (req, res) => {
+  const status = req.body.type;
+  const ids = req.body.ids.split(", ");
+
+  //update
+  switch (status) {
+    case "active":
+      await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
+      break;
+
+    case "inactive":
+      await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
+      break;
+
+    default:
+      break;
+  }
+
+  //redirect về trang danh sách sản phẩm
+  res.redirect(req.get("Referrer"));
+};

@@ -1,5 +1,7 @@
 const express = require("express");
 const methodOverride = require('method-override');
+const bodyParser = require("body-parser");
+
 require("dotenv").config();
 
 const database = require("./config/database");
@@ -14,6 +16,9 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(methodOverride('_method'));
+
+//parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Cấu hình thư mục chứa file view và template engine (PUG)
 app.set("views", "./views");
