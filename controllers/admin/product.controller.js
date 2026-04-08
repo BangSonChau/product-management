@@ -19,7 +19,6 @@ module.exports.index = async (req, res) => {
   }
 
   const objectSearch = searchHelper(req.query);
-  console.log(objectSearch);
 
   if (objectSearch.regex) {
     find.title = objectSearch.regex;
@@ -51,3 +50,14 @@ module.exports.index = async (req, res) => {
   });
 };
 
+// [GET] /admin/products//change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+  const status = req.params.status;
+  const id = req.params.id;
+
+  //Cập nhật trạng thái của sản phẩm có id
+  await Product.updateOne({_id: id}, {status: status});
+
+  //redirect về trang danh sách sản phẩm
+  res.redirect(req.get('Referrer'));
+}
