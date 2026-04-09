@@ -97,3 +97,9 @@ module.exports.deleteItem = async (req, res) => {
     { deleted: true, deletedAt: new Date()});
   res.redirect(req.get("Referrer"));
 };
+
+
+// [PATCH] /admin/recyle-bin/restore/:id
+module.exports.restoreItem = async (req, res) => {
+  res.send("Đã khôi phục sản phẩm có id: " + req.params.id);
+}

@@ -3,24 +3,26 @@ const buttonsChangeStatus = document.querySelectorAll("[button-change-status]");
 
 if (buttonsChangeStatus.length > 0) {
   const formChangeStatus = document.querySelector("#form-change-status");
-  const path = formChangeStatus.getAttribute("data-path");
 
-  buttonsChangeStatus.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const statusCurrent = btn.getAttribute("data-status");
-      const id = btn.getAttribute("data-id");
+  if (formChangeStatus) {
+    const path = formChangeStatus.getAttribute("data-path");
+    buttonsChangeStatus.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const statusCurrent = btn.getAttribute("data-status");
+        const id = btn.getAttribute("data-id");
 
-      let statusChange = statusCurrent == "active" ? "inactive" : "active";
+        let statusChange = statusCurrent == "active" ? "inactive" : "active";
 
-      const action = path + `/${statusChange}/${id}?_method=PATCH`;
+        const action = path + `/${statusChange}/${id}?_method=PATCH`;
 
-      console.log(action);
+        console.log(action);
 
-      formChangeStatus.action = action;
+        formChangeStatus.action = action;
 
-      formChangeStatus.submit();
+        formChangeStatus.submit();
+      });
     });
-  });
+  }
 }
 //End Change status
 
@@ -112,7 +114,7 @@ if (buttonsDelete.length > 0) {
         const action = path + `/${id}?_method=DELETE`;
 
         console.log(action);
-        
+
         formDeleteItem.action = action;
 
         formDeleteItem.submit();
@@ -121,3 +123,62 @@ if (buttonsDelete.length > 0) {
   });
 }
 // End Delete Item
+
+// Restore Item
+const buttonsRestore = document.querySelectorAll("[button-restore]");
+
+if (buttonsRestore.length > 0) {
+  buttonsRestore.forEach((btn) => {
+    const formRestoreItem = document.querySelector("#form-restore-item");
+    const path = formRestoreItem.getAttribute("data-path");
+
+    btn.addEventListener("click", () => {
+      const isConfirm = confirm(
+        "Bạn có chắc chắn muốn khôi phục sản phẩm này?",
+      );
+
+      if (isConfirm) {
+        const id = btn.getAttribute("data-id");
+
+        const action = path + `/${id}?_method=PATCH`;
+
+        formRestoreItem.action = action;
+
+        formRestoreItem.submit();
+      }
+    });
+  });
+}
+// End Restore Item
+
+// Delete Forever Item
+const buttonsDeleteForever = document.querySelectorAll("[button-delete-forever]");
+
+if (buttonsDeleteForever.length > 0) {
+  const formDeleteItemForever = document.querySelector("#form-delete-item-forever");
+  const path = formDeleteItemForever.getAttribute("data-path");
+
+  buttonsDeleteForever.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const isConfirm = confirm("Xóa vĩnh viễn sản phẩm này?");
+
+      if(isConfirm) {
+        
+        const id = btn.getAttribute("data-id");
+
+        const action = path + `/${id}?_method=DELETE`;
+
+        formDeleteItemForever.action = action;
+
+        formDeleteItemForever.submit();
+      }
+    });
+
+  });
+
+}
+
+
+
+
+// End Delete Forever Item

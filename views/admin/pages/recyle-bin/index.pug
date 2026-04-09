@@ -1,10 +1,10 @@
 extends  ../../layouts/default.pug
+include ../../mixins/pagination.pug
 include ../../mixins/filter-status.pug
 include ../../mixins/search.pug
-include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi.pug
 
-block main
+block main 
   h1 #{pageTitle}
 
   .card.mb-3
@@ -15,10 +15,11 @@ block main
           +filter-status(filterStatus)
         .col-6
           +search(keyword)
-  
+
   .card.mb-3
     .card-header Danh sách sản phẩm
     .card-body
+
       +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
       
       table(
@@ -65,10 +66,12 @@ block main
               td
                 button(
                   class="btn btn-warning btn-sm me-1"
-                ) Sửa
+                  button-restore 
+                  data-id=item.id
+                ) Khôi phục
                 button(
                   class="btn btn-danger btn-sm"
-                  button-delete
+                  button-delete-forever
                   data-id=item.id
                 ) Xóa
 
@@ -77,16 +80,15 @@ block main
   form(
     action="",
     method="POST",
-    id= 'form-change-status'
-    data-path= `${prefixAdmin}/products/change-status`
+    id= 'form-restore-item'
+    data-path= `${prefixAdmin}/recyle-bin/restore`
   )
 
   form(
     action="",
     method="POST",
-    id= 'form-delete-item'
-    data-path= `${prefixAdmin}/products/delete`
+    id= 'form-delete-item-forever'
+    data-path= `${prefixAdmin}/recyle-bin/delete`
   )
-
 
   script(src="/admin/js/product.js") 
