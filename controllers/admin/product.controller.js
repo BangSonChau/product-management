@@ -77,6 +77,13 @@ module.exports.changeMulti = async (req, res) => {
       await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
       break;
 
+    case "delete-all":
+      //xóa mềm
+      await Product.updateMany(
+        { _id: { $in: ids } },
+        { deleted: true, deletedAt: new Date() },
+      );
+      break;
     default:
       break;
   }
@@ -93,13 +100,14 @@ module.exports.deleteItem = async (req, res) => {
   // await Product.deleteOne({ _id: id });
 
   // Xóa mềm
-  await Product.updateOne({ _id: id }, 
-    { deleted: true, deletedAt: new Date()});
+  await Product.updateOne(
+    { _id: id },
+    { deleted: true, deletedAt: new Date() },
+  );
   res.redirect(req.get("Referrer"));
 };
-
 
 // [PATCH] /admin/recyle-bin/restore/:id
 module.exports.restoreItem = async (req, res) => {
   res.send("Đã khôi phục sản phẩm có id: " + req.params.id);
-}
+};

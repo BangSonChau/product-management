@@ -65,38 +65,6 @@ if (checkboxMulti) {
 
 //End Checkbox multi
 
-// Form change multi
-const formChangeMulti = document.querySelector("[form-change-multi]");
-
-if (formChangeMulti) {
-  formChangeMulti.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const checkboxMulti = document.querySelector("[checkbox-multi]");
-
-    const inputsChecked = checkboxMulti.querySelectorAll(
-      'input[name="id"]:checked',
-    );
-
-    if (inputsChecked.length > 0) {
-      let ids = [];
-      const inputIds = formChangeMulti.querySelector("input[name='ids']");
-
-      inputsChecked.forEach((input) => {
-        const id = input.value;
-        ids.push(id);
-      });
-
-      inputIds.value = ids.join(", ");
-
-      formChangeMulti.submit();
-    } else {
-      alert("Vui lòng chọn ít nhất một sản phẩm để áp dụng thay đổi");
-    }
-  });
-}
-//End Form change multi
-
 // Delete Item
 const buttonsDelete = document.querySelectorAll("[button-delete]");
 
@@ -152,18 +120,21 @@ if (buttonsRestore.length > 0) {
 // End Restore Item
 
 // Delete Forever Item
-const buttonsDeleteForever = document.querySelectorAll("[button-delete-forever]");
+const buttonsDeleteForever = document.querySelectorAll(
+  "[button-delete-forever]",
+);
 
 if (buttonsDeleteForever.length > 0) {
-  const formDeleteItemForever = document.querySelector("#form-delete-item-forever");
+  const formDeleteItemForever = document.querySelector(
+    "#form-delete-item-forever",
+  );
   const path = formDeleteItemForever.getAttribute("data-path");
 
   buttonsDeleteForever.forEach((btn) => {
     btn.addEventListener("click", () => {
       const isConfirm = confirm("Xóa vĩnh viễn sản phẩm này?");
 
-      if(isConfirm) {
-        
+      if (isConfirm) {
         const id = btn.getAttribute("data-id");
 
         const action = path + `/${id}?_method=DELETE`;
@@ -173,12 +144,7 @@ if (buttonsDeleteForever.length > 0) {
         formDeleteItemForever.submit();
       }
     });
-
   });
-
 }
-
-
-
 
 // End Delete Forever Item

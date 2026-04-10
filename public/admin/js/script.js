@@ -3,7 +3,7 @@ const buttonStatus = document.querySelectorAll("[button-status]");
 if (buttonStatus.length > 0) {
   buttonStatus.forEach((button) => {
     let url = new URL(window.location.href);
-    
+
     button.addEventListener("click", () => {
       const status = button.getAttribute("button-status");
 
@@ -56,3 +56,46 @@ if (btnsPagination) {
 }
 //EndPagination
 
+// Form change multi
+const formChangeMulti = document.querySelector("[form-change-multi]");
+
+if (formChangeMulti) {
+  formChangeMulti.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const checkboxMulti = document.querySelector("[checkbox-multi]");
+
+    const inputsChecked = checkboxMulti.querySelectorAll(
+      'input[name="id"]:checked',
+    );
+
+    const typeChange = e.target.type.value;
+
+    if (typeChange === "delete-all") {
+      const isConfirm = confirm(
+        "Bạn có chắc chắn muốn xóa tất cả sản phẩm đã chọn không?",
+      );
+
+      if (!isConfirm) {
+        return;
+      }
+    }
+
+    if (inputsChecked.length > 0) {
+      let ids = [];
+      const inputIds = formChangeMulti.querySelector("input[name='ids']");
+
+      inputsChecked.forEach((input) => {
+        const id = input.value;
+        ids.push(id);
+      });
+
+      inputIds.value = ids.join(", ");
+
+      formChangeMulti.submit();
+    } else {
+      alert("Vui lòng chọn ít nhất một sản phẩm để áp dụng thay đổi");
+    }
+  });
+}
+//End Form change multi
