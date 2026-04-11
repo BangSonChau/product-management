@@ -55,6 +55,7 @@ module.exports.restoreItem = async (req, res) => {
 
   await Product.updateOne({ _id: id }, { deleted: false });
   
+  req.flash('success', 'Khôi phục sản phẩm thành công');
   res.redirect(req.get("Referrer"));
 }
 
@@ -63,5 +64,6 @@ module.exports.deleteItemForever = async (req, res) => {
 
   await Product.deleteOne({ _id: id });
   
+  req.flash('success', 'Xóa sản phẩm vĩnh viễn thành công');
   res.redirect(req.get("Referrer"));
 }

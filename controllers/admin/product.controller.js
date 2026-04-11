@@ -59,6 +59,8 @@ module.exports.changeStatus = async (req, res) => {
   //Cập nhật trạng thái của sản phẩm có id
   await Product.updateOne({ _id: id }, { status: status });
 
+  req.flash('success', 'Cập nhật trạng thái sản phẩm thành công');
+
   //redirect về trang danh sách sản phẩm
   res.redirect(req.get("Referrer"));
 };
@@ -72,10 +74,12 @@ module.exports.changeMulti = async (req, res) => {
   switch (status) {
     case "active":
       await Product.updateMany({ _id: { $in: ids } }, { status: "active" });
+      req.flash('success', `Cập nhật trạng thái thành công ${ids.length} sản phẩm`);
       break;
 
     case "inactive":
       await Product.updateMany({ _id: { $in: ids } }, { status: "inactive" });
+      req.flash('success', `Cập nhật trạng thái thành công ${ids.length} sản phẩm`);
       break;
 
     case "delete-all":
@@ -84,6 +88,7 @@ module.exports.changeMulti = async (req, res) => {
         { _id: { $in: ids } },
         { deleted: true, deletedAt: new Date() },
       );
+      req.flash('success', `Xóa thành công ${ids.length} sản phẩm`);
       break;
 
     case "change-position":
@@ -93,6 +98,7 @@ module.exports.changeMulti = async (req, res) => {
         postion = parseInt(postion);
 
         await Product.updateOne({ _id: id }, { position: postion });
+        req.flash('success', `Cập nhật vị trí thành công ${ids.length} sản phẩm`);
       }
       break;
 
@@ -116,10 +122,6 @@ module.exports.deleteItem = async (req, res) => {
     { _id: id },
     { deleted: true, deletedAt: new Date() },
   );
+  req.flash('success', 'Xóa sản phẩm thành công');
   res.redirect(req.get("Referrer"));
-};
-
-// [PATCH] /admin/recyle-bin/restore/:id
-module.exports.restoreItem = async (req, res) => {
-  res.send("Đã khôi phục sản phẩm có id: " + req.params.id);
 };

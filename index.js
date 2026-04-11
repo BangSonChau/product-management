@@ -1,6 +1,9 @@
 const express = require("express");
-const methodOverride = require('method-override');
+const methodOverride = require("method-override");
+const flash = require("express-flash");
 // const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 
 require("dotenv").config();
 
@@ -15,7 +18,7 @@ const adminRoute = require("./routes/admin/index.route");
 const app = express();
 const port = process.env.PORT;
 
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 
 //parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +32,11 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // Cấu hình thư mục chứa file tĩnh (CSS, JS, hình ảnh)
 app.use(express.static("public"));
+
+// Flash message
+app.use(cookieParser("ShinHehe"));
+app.use(session({ cookie: { maxAge: 60000 } }));
+app.use(flash());
 
 //Routes
 route(app);

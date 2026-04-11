@@ -94,7 +94,6 @@ if (formChangeMulti) {
             .querySelector('input[name="position"]').value;
 
           ids.push(`${id}-${position}`);
-          
         } else {
           ids.push(id);
         }
@@ -109,3 +108,20 @@ if (formChangeMulti) {
   });
 }
 //End Form change multi
+
+// Show-alert
+const showAlert = document.querySelectorAll("[show-alert]");
+
+if (showAlert.length > 0) {
+  const dataTime = parseInt(showAlert[0].getAttribute("data-time"));
+  const closeAlert = showAlert[0].querySelector("[close-alert]");
+
+  setTimeout(() => {
+    showAlert[0].classList.add("alert-hidden");
+  }, dataTime);
+
+  closeAlert.addEventListener("click", () => {
+    showAlert[0].classList.add("alert-hidden");
+  });
+}
+// End Show alert
