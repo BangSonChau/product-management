@@ -7,7 +7,7 @@ module.exports.index = async (req, res) => {
     // Bộ lọc các sản phẩm có trường
     status: "active",
     deleted: false
-  });
+  }).sort({ position: "desc" });
 
   const newProducts = products.map(item => {
     item.priceNew = (item.price*(100 - item.discountPercentage)/100).toFixed(2);
