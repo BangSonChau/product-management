@@ -143,5 +143,4 @@ if (uploadImage) {
     }
   });
 }
-
 // End Upload image
