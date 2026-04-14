@@ -81,9 +81,20 @@ block main
                   )                    
                     button.badge.bg-danger Dừng hoạt động
               td
-                button(
-                  class="btn btn-warning btn-sm me-1"
-                ) Sửa
+                a(
+                  href=`${prefixAdmin}/products/detail/${item.id}` 
+                )
+                  button(
+                    class="btn btn-secondary btn-sm me-1"
+                  ) Chi tiết
+
+                a(
+                  href=`${prefixAdmin}/products/edit/${item.id}` 
+                )
+                  button(
+                    class="btn btn-warning btn-sm me-1"
+                  ) Sửa
+                
                 button(
                   class="btn btn-danger btn-sm"
                   button-delete

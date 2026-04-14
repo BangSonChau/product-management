@@ -6,9 +6,9 @@ block main
 
   h1(class="mb-4") #{pageTitle}
 
-  form(
-    action=`${prefixAdmin}/products/create`
-    id="form-create-product"
+  form( 
+    action=`${prefixAdmin}/products/edit/:id`
+    id="form-edit-product"
     method="POST"
     enctype="multipart/form-data"
   )
@@ -20,6 +20,7 @@ block main
         id="title"
         name="title"
         required
+        value=product.title
       )
     div(class="form-group")
       label(for="desc") Mô tả
@@ -28,7 +29,7 @@ block main
         id="desc"
         name="description"
         rows="5"
-      )
+      ) #{product.description}
 
     div(class="form-group")
       label(for="price") Giá
@@ -37,7 +38,7 @@ block main
         class="form-control"
         id="price"
         name="price"
-        value="0"
+        value=product.price
         min="0"
       )
 
@@ -48,7 +49,7 @@ block main
         class="form-control"
         id="discount"
         name="discountPercentage"
-        value="0"
+        value=product.discountPercentage
         min="0"
       )
 
@@ -59,7 +60,7 @@ block main
         class="form-control"
         id="stock"
         name="stock"
-        value="0"
+        value=product.stock
         min="0"
       )
 
@@ -74,7 +75,7 @@ block main
         upload-image-input
       )
       img(
-        src=""
+        src=product.thumbnail
         upload-image-preview
         class="image-preview"
       )
@@ -88,6 +89,7 @@ block main
         name="position"
         placeholder="Tự động tăng"
         min="1"
+        value=product.position
       )
 
     div(class="form-group form-check form-check-inline")
@@ -97,7 +99,7 @@ block main
         id="statusActive"
         name="status"
         value="active"
-        checked
+        checked=(product.status === "active" ? true : false)
       )
       label(for="statusActive" class="form-check-label") Hoạt động
 
@@ -108,6 +110,7 @@ block main
         id="statusInActive"
         name="status"
         value="inactive"
+        checked=(product.status === "inactive" ? true : false)
       )
       label(for="statusInActive" class="form-check-label") Dừng hoạt động
 
@@ -115,6 +118,5 @@ block main
       button(
         type="submit"
         class="btn btn-primary"
-      ) Tạo mới
-
+      ) Cập nhật
   script(src="/admin/js/product.js")
