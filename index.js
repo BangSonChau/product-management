@@ -24,14 +24,14 @@ app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 
 // Cấu hình thư mục chứa file view và template engine (PUG)
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 // App local variables (app.locals) để lưu trữ các biến toàn cục
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // Cấu hình thư mục chứa file tĩnh (CSS, JS, hình ảnh)
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 
 // Flash message
 app.use(cookieParser("ShinHehe"));
@@ -45,3 +45,6 @@ adminRoute(app);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+//Important
+module.exports = app;
